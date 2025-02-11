@@ -34,7 +34,7 @@ function populateMaterialSelect(data) {
     materialsSelect.addEventListener('change', (event) => {
         const selectedMaterial = event.target.value;
         populateThicknessSelect(data, selectedMaterial);
-        clearResult(); // Очищаємо результат при зміні матеріалу
+        clearResult();
     });
 }
 
@@ -64,7 +64,6 @@ function clearResult() {
     resultElement.textContent = 'Приблизний час порізки: —';
 }
 
-// Функція для розрахунку часу порізки
 function calculateCuttingTime() {
     const materialSelect = document.getElementById('materials');
     const thicknessSelect = document.getElementById('thickness');
@@ -88,31 +87,27 @@ function calculateCuttingTime() {
         return;
     }
 
-    // Переводимо довжину в мм, якщо потрібно
     let lengthInMm = length;
     if (selectedUnits === 'м') {
-        lengthInMm *= 1000;  // 1 м = 1000 мм
+        lengthInMm *= 1000;
     } else if (selectedUnits === 'см') {
-        lengthInMm *= 10;  // 1 см = 10 мм
+        lengthInMm *= 10;
     }
 
-    // Розраховуємо час порізки в секундах
-    const timeInSeconds = lengthInMm / cuttingSpeed;
+    let timeInSeconds = lengthInMm / cuttingSpeed;
 
-    // Перетворюємо час в формат hh:mm:ss
+    timeInSeconds *= 1.1;
+
     const hours = Math.floor(timeInSeconds / 3600);
     const minutes = Math.floor((timeInSeconds % 3600) / 60);
     const seconds = Math.floor(timeInSeconds % 60);
 
-    // Виводимо результат
     resultElement.textContent = `Приблизний час порізки: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 }
 
-// Додаємо події для очищення результату
 document.getElementById('materials').addEventListener('change', clearResult);
 document.getElementById('thickness').addEventListener('change', clearResult);
 document.getElementById('units').addEventListener('change', clearResult);
 document.getElementById('length').addEventListener('input', clearResult);
 
-// Додаємо подію для кнопки "Розрахувати час порізки"
 document.getElementById('calculateCuttingTime').addEventListener('click', calculateCuttingTime);
