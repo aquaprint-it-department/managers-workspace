@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+select, input, button {
+    margin-top: 5px;
+    padding: 8px;
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 15px;
+}

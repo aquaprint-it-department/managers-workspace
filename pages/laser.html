@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<h2>Калькулятор обрахунку часу лазерної порізки</h2>
+
+<div style="display: flex; gap: 20px">
+    <div>
+        <label for="materials">Матеріал:</label>
+        <select id="materials"></select>
+    </div>
+
+    <div>
+        <label for="thickness">Товщина:</label>
+        <select id="thickness"></select>
+    </div>
+</div>
+
+<label for="units">Одиниці виміру:</label>
+<select id="units">
+    <option value="м">Метри</option>
+    <option value="см">Сантиметри</option>
+    <option value="мм">Міліметри</option>
+</select>
+
+<label for="length">Введіть довжину:</label>
+<input type="number" id="length" placeholder="Довжина" />
+
+<button id="calculateCuttingTime">Розрахувати час порізки</button>
+
+<p class="result" id="result">Приблизний час порізки: —</p>
+
+<script src="../js/script.js"></script>
+</body>
+</html>
