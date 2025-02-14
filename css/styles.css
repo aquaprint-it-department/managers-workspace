@@ -69,6 +69,7 @@ button, input:not([type="checkbox"]), textarea, select, a {
     display: flex;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap;
 }
 
 .form-item {
