@@ -7,34 +7,49 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-<h2>Калькулятор обрахунку часу лазерної порізки</h2>
+<div class="body-area">
+    <a class="back" href="../index.html">Назад</a>
 
-<div style="display: flex; gap: 20px">
-    <div>
-        <label for="materials">Матеріал:</label>
-        <select id="materials"></select>
-    </div>
+    <h2>Калькулятор обрахунку часу лазерної порізки</h2>
 
-    <div>
-        <label for="thickness">Товщина:</label>
-        <select id="thickness"></select>
+    <div class="form-view">
+        <div class="form-row">
+            <div class="form-item">
+                <label for="materials">Матеріал:</label>
+                <select id="materials"></select>
+            </div>
+
+            <div class="form-item">
+                <label for="thickness">Товщина:</label>
+                <select id="thickness"></select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-item">
+                <label for="units">Одиниці виміру:</label>
+                <select id="units">
+                    <option value="м">Метри</option>
+                    <option value="см">Сантиметри</option>
+                    <option value="мм">Міліметри</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-item">
+                <label for="length">Введіть довжину:</label>
+                <input type="number" id="length" placeholder="Довжина"/>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <p class="result" id="result">Приблизний час порізки: —</p>
+            <button id="calculateCuttingTime">Розрахувати час порізки</button>
+        </div>
+
     </div>
 </div>
-
-<label for="units">Одиниці виміру:</label>
-<select id="units">
-    <option value="м">Метри</option>
-    <option value="см">Сантиметри</option>
-    <option value="мм">Міліметри</option>
-</select>
-
-<label for="length">Введіть довжину:</label>
-<input type="number" id="length" placeholder="Довжина" />
-
-<button id="calculateCuttingTime">Розрахувати час порізки</button>
-
-<p class="result" id="result">Приблизний час порізки: —</p>
-
-<script src="../js/script.js"></script>
+<script src="../js/laser-time-calc.js"></script>
 </body>
 </html>

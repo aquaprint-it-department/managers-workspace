@@ -1,19 +1,83 @@
 body {
     font-family: Arial, sans-serif;
+    background: linear-gradient(-140deg, rgb(102, 255, 209) 0%, rgb(173, 44, 242) 41%, rgb(93, 27, 255) 72%, rgb(233, 121, 255) 100%) no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-area {
+    margin: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    height: calc(100% - 80px);
+    border-radius: 20px;
     padding: 20px;
+    box-shadow: 3px 3px 6px #686868;
+}
+
+.main-logo {
+    width: fit-content;
+    margin: 20px auto 0;
 }
 
 label {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+a.back {
     display: block;
-    margin-top: 10px;
+    margin-bottom: 20px;
+    width: fit-content;
 }
 
-select, input, button {
-    margin-top: 5px;
-    padding: 8px;
+button, input:not([type="checkbox"]), textarea, select, a {
+    display: flex;
+    padding: 5px 16px;
+    border: none;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 2px #999999;
+    text-decoration: none;
 }
 
-#result {
-    font-weight: bold;
-    margin-top: 15px;
+.form-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+}
+
+.check-list {
+    background-color: #f7f7f7;
+    padding: 24px;
+    border: 1px dashed #adadad;
+}
+
+.price-view {
+
 }
