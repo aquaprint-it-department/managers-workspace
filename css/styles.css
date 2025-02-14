@@ -51,6 +51,12 @@ button, input:not([type="checkbox"]), textarea, select, a {
     border-radius: 6px;
     box-shadow: 0 1px 2px #999999;
     text-decoration: none;
+    color: #000000;
+}
+
+.btn-icon {
+    display: flex;
+    gap: 8px;
 }
 
 .form-view {
