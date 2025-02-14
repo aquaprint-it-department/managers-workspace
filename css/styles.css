@@ -2,15 +2,16 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(-140deg, rgb(102, 255, 209) 0%, rgb(173, 44, 242) 41%, rgb(93, 27, 255) 72%, rgb(233, 121, 255) 100%) no-repeat;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .body-area {
     margin: 40px;
     background-color: rgba(255, 255, 255, 1);
-    height: calc(100% - 80px);
+    min-height: calc(100vh - 180px);
     border-radius: 20px;
     padding: 20px;
     box-shadow: 3px 3px 6px #686868;
