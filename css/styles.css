@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Gilroy";
+    src: local("Gilroy"), url("../fonts/Gilroy-Regular.ttf");
+    font-display: block; }
+@font-face {
+    font-family: "Gilroy";
+    src: local("Gilroy"), url("../fonts/Gilroy-Thin.ttf");
+    font-display: block;
+    font-weight: 300; }
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(-140deg, rgb(102, 255, 209) 0%, rgb(173, 44, 242) 41%, rgb(93, 27, 255) 72%, rgb(233, 121, 255) 100%) no-repeat;
@@ -9,7 +19,7 @@ body {
 }
 
 .body-area {
-    margin: 40px;
+    margin: 16px 40px;
     background-color: rgba(255, 255, 255, 1);
     min-height: calc(100vh - 180px);
     border-radius: 20px;
@@ -20,6 +30,7 @@ body {
 .main-logo {
     width: fit-content;
     margin: 20px auto 0;
+    min-width: 400px;
 }
 
 label {
