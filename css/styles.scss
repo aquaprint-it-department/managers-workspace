@@ -1,23 +1,25 @@
 @font-face {
   font-family: "Gilroy";
   src: local("Gilroy"), url("../fonts/Gilroy-Regular.ttf");
-  font-display: block;
-}
+  font-display: block; }
 @font-face {
   font-family: "Gilroy";
   src: local("Gilroy"), url("../fonts/Gilroy-Thin.ttf");
   font-display: block;
-  font-weight: 300;
-}
+  font-weight: 300; }
+
 body {
   font-family: Arial, sans-serif;
 }
 
-.calc-area input {
-  width: 100px;
-}
-.calc-area select {
-  width: 200px;
+.calc-area {
+  input {
+    width: 100px;
+  }
+
+  select {
+    width: 200px;
+  }
 }
 
 #alertContainer {
@@ -26,5 +28,3 @@ body {
   top: 0;
   right: 16px;
 }
-
-/*# sourceMappingURL=styles.css.map */

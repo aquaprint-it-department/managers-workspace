@@ -1,20 +1,44 @@
-const laserMaterialsUrl = '../json-files/laser-materials.json';
-let laserMaterials;
+const config = {
+    apiKey: 'AIzaSyCDFkQH1IPOymqa9ocp4m-vyOURRQpIGOU',
+    spreadsheetId: '1dU1-R0Ncrp20oRDiYu7_YfDxk_djIBVqSTEpzwke6Io',
+    laserTime: 'Час лазерної порізки',
+};
 
-fetch(laserMaterialsUrl)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        laserMaterials = data.laserData.materials;
-        populateMaterialSelect(laserMaterials);
-    })
-    .catch(error => {
-        console.error('Error loading JSON:', error);
-    });
+let laserMaterials;
+document.addEventListener('DOMContentLoaded', () => {
+    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.laserTime}?key=${config.apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            const header = data.values[0].slice(2); // Товщини
+            const result = {};
+
+            data.values.slice(1).forEach(row => {
+                const material = row[0]?.trim();
+                const standard = row[1];
+                const values = row.slice(2);
+                const entry = {};
+
+                values.forEach((val, i) => {
+                    if (val) {
+                        const thickness = header[i] ?? "-";
+                        entry[thickness] = parseInt(val, 10);
+                    }
+                });
+
+                if (Object.keys(entry).length === 0 && standard) {
+                    entry["-"] = parseInt(standard, 10);
+                }
+
+                if (material) {
+                    result[material] = entry;
+                }
+            });
+
+            laserMaterials = result;
+            populateMaterialSelect(laserMaterials);
+        })
+        .catch(error => console.error('Error:', error));
+});
 
 function populateMaterialSelect(data) {
     const materialsSelect = document.getElementById('materials');
@@ -41,7 +65,7 @@ function populateMaterialSelect(data) {
 function populateThicknessSelect(data, selectedMaterial) {
     const thicknessSelect = document.getElementById('thickness');
 
-    thicknessSelect.innerHTML = '<option value="">Виберіть товщину</option>';
+    thicknessSelect.innerHTML = '';
 
     if (selectedMaterial && data[selectedMaterial]) {
         const thicknesses = Object.keys(data[selectedMaterial]);
