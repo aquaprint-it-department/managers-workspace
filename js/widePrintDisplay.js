@@ -69,10 +69,10 @@ function fillData(data) {
             option.setAttribute('data-height', item[6]);
         }
 
-        if (localStorage.getItem('clientType') === 'ec') {
-            option.setAttribute('data-price', item[2]);
-        } else {
+        if (localStorage.getItem('clientType') === 'aa') {
             option.setAttribute('data-price', item[3]);
+        } else {
+            option.setAttribute('data-price', item[2]);
         }
 
         selectElement.appendChild(option);
