@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values/${config.materialsRange}?key=${config.apiKey}`)
         .then(response => response.json())
         .then(data => {
-            fillData(data);
             initClientType(data);
+            fillData(data);
             updateScore()
         })
         .catch(error => console.error('Error:', error));
