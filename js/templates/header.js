@@ -2,7 +2,7 @@ export const header = `
     <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container">
         <a class="navbar-brand" href="/managers-workspace/index.html">
-            <img src="/managers-workspace/images/logo.png" alt="Лого" height="42" class="d-inline-block align-text-top">
+            <img src="/images/logo.png" alt="Лого" height="42" class="d-inline-block align-text-top">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Перемикач навігації">
             <span class="navbar-toggler-icon"></span>
