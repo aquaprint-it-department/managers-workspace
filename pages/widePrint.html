@@ -82,7 +82,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3">
                         <h4 class="card-title mb-2">Рахунок</h4>
-                        <button class="btn btn-light" id="clearScore"><i class="fa-solid fa-trash-can-arrow-up"></i> Очистити</button>
+                        <div>
+                            <button class="btn btn-outline-danger me-2" id="clearScore"><i class="fa-solid fa-trash-can-arrow-up"></i> Очистити</button>
+                            <button class="btn btn-outline-success" onclick="exportTableToExcel('count-table', 'Прайс-лист')"><i class="fa-solid fa-file-excel"></i> Експорт</button>
+                        </div>
                     </div>
                     <table class="table" id="count-table">
                         <thead>
@@ -113,9 +116,9 @@
     </div>
 </div>
 
-<script src="/managers-workspace/js/widePrintDisplay.js"></script>
+<script src="../js/widePrintDisplay.js"></script>
 
-<script type="module" src="/managers-workspace/js/main.js"></script>
+<script type="module" src="../js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

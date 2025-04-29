@@ -2,7 +2,9 @@ export const sidebar = `
 
     <div class=" btn-group  mt-3">
         <div class="nav btn-group text-start">
-            <a href="/managers-workspace/pages/laser.html" class="btn btn-outline-dark text-start" data-content="laser">Калькулятор часу лазерної порізки</a>
+            <a href="/pages/laser.html" class="btn btn-outline-dark text-start" data-content="laser">Калькулятор часу лазерної порізки</a>
+            <a href="/pages/widePrint.html" class="btn btn-outline-dark text-start" data-content="widePrint">Калькулятор ШФ</a>
+            <a href="/pages/canvas.html" class="btn btn-outline-dark text-start" data-content="canvas">Калькулятор холстів</a>
         </div>
     </div>
     <div id="alertContainer"></div>

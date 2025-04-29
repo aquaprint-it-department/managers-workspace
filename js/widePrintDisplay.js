@@ -1,7 +1,7 @@
 const config = {
     apiKey: 'AIzaSyCDFkQH1IPOymqa9ocp4m-vyOURRQpIGOU',
     spreadsheetId: '1dU1-R0Ncrp20oRDiYu7_YfDxk_djIBVqSTEpzwke6Io',
-    materialsRange: 'ШФ-матеріали!A2:G1000',
+    materialsRange: 'ШФ-матеріали!A2:H1000',
     servicesRange: 'ШФ-послуги!A2:D1000'
 };
 
@@ -57,22 +57,22 @@ function fillData(data) {
 
     data.values.forEach(item => {
         const option = document.createElement('option');
-        option.value = item[0];
-        option.textContent = item[0];
+        option.value = item[1];
+        option.textContent = item[1];
 
-        option.setAttribute('data-units', item[1]);
+        option.setAttribute('data-units', item[2]);
 
-        if (item[5]) {
-            option.setAttribute('data-width', item[5]);
-        }
         if (item[6]) {
-            option.setAttribute('data-height', item[6]);
+            option.setAttribute('data-width', item[6]);
+        }
+        if (item[7]) {
+            option.setAttribute('data-height', item[7]);
         }
 
         if (localStorage.getItem('clientType') === 'aa') {
-            option.setAttribute('data-price', item[3]);
+            option.setAttribute('data-price', item[4]);
         } else {
-            option.setAttribute('data-price', item[2]);
+            option.setAttribute('data-price', item[3]);
         }
 
         selectElement.appendChild(option);
@@ -288,14 +288,14 @@ function fillAdditionalData(data) {
 
     data.forEach(item => {
         const option = document.createElement('option');
-        option.value = item[0];
-        option.textContent = item[0];
+        option.value = item[1];
+        option.textContent = item[1];
 
-        option.setAttribute('data-units', item[1]);
+        option.setAttribute('data-units', item[2]);
         if (localStorage.getItem('clientType') === 'ec') {
-            option.setAttribute('data-price', item[2]);
-        } else {
             option.setAttribute('data-price', item[3]);
+        } else {
+            option.setAttribute('data-price', item[4]);
         }
 
         newCardSelect.appendChild(option);
@@ -409,6 +409,9 @@ function updateAdditionalCard(card) {
                 sidesTotal.textContent = 'Перевірте значення!';
                 return;
             }
+        } else if (units === 'км') {
+                sidesTotal.textContent = 'Введіть значення вручну!';
+                return;
         }
 
         sidesTotal.textContent = sum * quantityField * price;
@@ -552,4 +555,55 @@ function showAlert(type, message) {
             alert.remove();
         }, 300);
     }, 5000);
+}
+
+function exportTableToExcel(tableID, filename = '') {
+    const table = document.getElementById(tableID);
+    if (!table) {
+        console.error(`Таблиця з id "${tableID}" не знайдена`);
+        return;
+    }
+
+    const tableClone = table.cloneNode(true);
+
+    // Видаляємо останній стовпець у кожному рядку (кнопки видалення)
+    const rows = tableClone.querySelectorAll('tr');
+    rows.forEach(row => {
+        if (row.cells.length > 0) {
+            row.deleteCell(row.cells.length - 1);
+        }
+    });
+
+    // Підрахунок суми
+    const originalData = JSON.parse(localStorage.getItem('savedScore')) || [];
+    const totalSum = originalData.reduce((acc, row) => acc + Number(row[4]), 0);
+
+    // Додаємо рядок з підсумком у tbody
+    const tBody = tableClone.querySelector('tbody');
+    const sumRow = document.createElement('tr');
+
+    for (let i = 0; i < 4; i++) {
+        const emptyCell = document.createElement('td');
+        sumRow.appendChild(emptyCell);
+    }
+
+    const totalCell = document.createElement('td');
+    totalCell.textContent = `Всього: ${totalSum} грн`;
+    totalCell.colSpan = 1;
+    totalCell.style.fontWeight = 'bold';
+    sumRow.appendChild(totalCell);
+
+    tBody.appendChild(sumRow);
+
+    // Експорт
+    const html = tableClone.outerHTML.replace(/ /g, '%20');
+    const dataType = 'application/vnd.ms-excel';
+    const fileName = filename ? filename + '.xls' : 'exported_table.xls';
+
+    const downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + html;
+    downloadLink.download = fileName;
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
