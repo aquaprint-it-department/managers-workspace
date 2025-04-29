@@ -1,3 +1,5 @@
+import { showAlert } from './widePrintDisplay.js';
+
 const config = {
     apiKey: 'AIzaSyCDFkQH1IPOymqa9ocp4m-vyOURRQpIGOU',
     spreadsheetId: '1dU1-R0Ncrp20oRDiYu7_YfDxk_djIBVqSTEpzwke6Io',
@@ -13,7 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             console.log(data);
             fillData(data.values);
-            document.getElementById('calculatePrice').addEventListener('click', calculatePrice)
+            document.getElementById('addToScore').addEventListener('click', addToScore);
+            document.getElementById('serviceSelect').addEventListener('change', calculatePrice);
+            document.getElementById('quantityInput').addEventListener('input', calculatePrice);
 
         })
         .catch(error => console.error('Error:', error));
@@ -38,12 +42,12 @@ function initClientType() {
 
     document.getElementById('optionEC').addEventListener('change', (event) => {
         if (event.target.checked) setClientType('ec');
-        
+        calculatePrice();
     });
 
     document.getElementById('optionAA').addEventListener('change', (event) => {
         if (event.target.checked) setClientType('aa');
-        
+        calculatePrice();
     });
 }
 
@@ -63,6 +67,8 @@ function fillData(data) {
 
         selectElement.appendChild(option);}
     });
+
+    calculatePrice();
 }
 
 function calculatePrice() {
@@ -74,4 +80,29 @@ function calculatePrice() {
     
     document.getElementById('result').textContent = result;
     console.log(price, quantity)
+}
+
+function addToScore() {
+    let scoreData = JSON.parse(localStorage.getItem('savedScore')) || [];
+
+    const selectElement = document.getElementById('serviceSelect');
+    const quantityField = Number(document.getElementById('quantityInput').value);
+    const client = (localStorage.getItem('clientType') === 'aa') ? '(ра)' : '(кк)';
+    const price = parseFloat(selectElement.options[selectElement.selectedIndex].getAttribute(`data-price-${localStorage.getItem('clientType')}`));
+    const total = document.getElementById('result').textContent;
+
+    const additionalData = document.querySelectorAll('#additionalServiceArea .card')
+
+    
+    if (quantityField && price) {
+        scoreData.push(['Холст на підрамнику', selectElement.options[selectElement.selectedIndex].text, quantityField, `${price} ${client}`, total]);
+        
+    console.log(scoreData);
+        localStorage.setItem('savedScore', JSON.stringify(scoreData));
+        showAlert('success', 'Успішно додано!');
+    } else {
+        if (!additionalData.length) {
+            showAlert('warning', 'Увага! Заповніть всі поля перед додаванням.');
+        }
+    }
 }

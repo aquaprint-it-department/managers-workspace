@@ -2,7 +2,7 @@ const config = {
     apiKey: 'AIzaSyCDFkQH1IPOymqa9ocp4m-vyOURRQpIGOU',
     spreadsheetId: '1dU1-R0Ncrp20oRDiYu7_YfDxk_djIBVqSTEpzwke6Io',
     materialsRange: 'ШФ-матеріали!A2:H1000',
-    servicesRange: 'ШФ-послуги!A2:D1000'
+    servicesRange: 'ШФ-послуги!A2:E1000'
 };
 
 let additionalDataArray = [];
@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
             initClientType(data);
             fillData(data);
             updateScore()
+            document.getElementById('exportTable').addEventListener('click', () => {
+                exportTableToExcel('count-table', 'Прайс-лист');
+              });              
         })
         .catch(error => console.error('Error:', error));
 });
@@ -531,7 +534,7 @@ function updateScore() {
     tableTotal.textContent = totalSum;
 }
 
-function showAlert(type, message) {
+export function showAlert(type, message) {
     const alertContainer = document.getElementById('alertContainer');
     if (!alertContainer) return;
 
